@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Dietitian</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="dieticians">Dietitians</string>
+    <string name="favourites">Favourites</string>
+    <string name="home">Home</string>
+    <string name="select_category">Select Category</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="password_confirm">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="news_feed">News Feed</string>
+    <string name="source">Sources</string>
+    <string name="settings">Settings</string>
+    <string name="share">Share</string>
+    <string name="category">Category</string>
+    <string name="dietitians">Dietitians</string>
+</resources>

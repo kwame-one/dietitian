@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "611381287861",
+    "firebase_url": "https://dietician-d7304.firebaseio.com",
+    "project_id": "dietician-d7304",
+    "storage_bucket": "dietician-d7304.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611381287861:android:33939b81fffb8714",
+        "android_client_info": {
+          "package_name": "com.kwame.dietitian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611381287861-eb9por7h51k1cb6mev76edub9t0dh829.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOnXcuYOOwu5LW8-J_JrsbNxlAn0ds-K8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
