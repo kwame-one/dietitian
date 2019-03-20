@@ -1,6 +1,7 @@
 package com.kwame.dietitian.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kwame.dietitian.R;
 import com.kwame.dietitian.adapter.DietitianAdapter;
@@ -25,6 +27,8 @@ public class DietitiansFragment extends Fragment {
     private DietitianAdapter adapter;
     private List<DietitianModel> dietitians = new ArrayList<>();
     private TextView textView;
+    private String[] names = {"John Doe", "Margette Doe", "Janet Doe", "Alice Freeman", "Alex Freeman"
+    , "Felix Ferguson", "Janice Wick", "Dickson Stark", "Steve Rogers", "Bruce Banner"};
 
     @Nullable
     @Override
@@ -50,24 +54,36 @@ public class DietitiansFragment extends Fragment {
         adapter = new DietitianAdapter(getActivity(), dietitians);
         recyclerView.setAdapter(adapter);
 
+        loadDietitians();
+
         adapter.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-
+                DietitianModel model = dietitians.get(pos);
+                Toast.makeText(getActivity(), model.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadDietitians();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadDietitians();
+                    }
+                },  2000);
             }
         });
     }
 
     private void loadDietitians() {
+        dietitians.clear();
         refreshLayout.setRefreshing(true);
+        for(int i=0; i<9; i++)
+            dietitians.add(new DietitianModel("","", names[i], "NutriDi", "", "", ""));
 
+        refreshLayout.setRefreshing(false);
         adapter.notifyDataSetChanged();
     }
 }

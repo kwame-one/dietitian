@@ -6,21 +6,34 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/icon"
+        android:layout_weight="5"
+        android:scaleType="centerInside"
+        android:src="@drawable/health"
+        android:layout_marginEnd="5dp"/>
+
     <TextView
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Weight Management"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:textColor="@color/black"
+        android:ellipsize="end"
         android:id="@+id/category"
-        android:layout_weight="1"/>
+        android:layout_marginStart="5dp"
+        android:layout_weight="2"/>
 
 
     <CheckBox
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/checkbox"
-        android:layout_weight="7"/>
+        android:layout_weight="5"/>
 
 
 

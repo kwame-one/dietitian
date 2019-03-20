@@ -43,7 +43,7 @@ public class DietitianAdapter extends RecyclerView.Adapter<DietitianAdapter.Diet
         DietitianModel item = dietitians.get(i);
         dietitianViewHolder.company.setText(item.getCompany());
         dietitianViewHolder.name.setText(item.getName());
-        Picasso.get().load(item.getImageUrl()).placeholder(R.drawable.person).into(dietitianViewHolder.profilePhoto);
+//        Picasso.get().load(item.getImageUrl()).placeholder(R.drawable.person).into(dietitianViewHolder.profilePhoto);
 
     }
 
