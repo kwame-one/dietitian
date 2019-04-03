@@ -1,5 +1,6 @@
 package com.kwame.dietitian.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.kwame.dietitian.R;
+import com.kwame.dietitian.activity.NewsDetailsActivity;
 import com.kwame.dietitian.adapter.NewsFeedAdapter;
 import com.kwame.dietitian.listener.ItemClickListener;
 import com.kwame.dietitian.listener.ItemLikeListener;
@@ -58,7 +60,15 @@ public class NewsFeedFragment extends Fragment {
             @Override
             public void onItemClick(View view, int pos) {
                 NewsFeedModel model = newsFeed.get(pos);
-                Toast.makeText(getActivity(), model.getTitle(), Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("id", model.getId());
+                bundle.putString("imageUrl", model.getImageUrl());
+                bundle.putString("title", model.getTitle());
+                bundle.putString("content", model.getContent());
+                Intent intent = new Intent(getActivity(), NewsDetailsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+//                Toast.makeText(getActivity(), model.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 

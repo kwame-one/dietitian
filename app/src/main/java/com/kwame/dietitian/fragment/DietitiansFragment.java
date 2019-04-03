@@ -1,5 +1,6 @@
 package com.kwame.dietitian.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kwame.dietitian.R;
+import com.kwame.dietitian.activity.DietitianProfileActivity;
 import com.kwame.dietitian.adapter.DietitianAdapter;
 import com.kwame.dietitian.listener.ItemClickListener;
 import com.kwame.dietitian.model.DietitianModel;
@@ -60,7 +62,17 @@ public class DietitiansFragment extends Fragment {
             @Override
             public void onItemClick(View view, int pos) {
                 DietitianModel model = dietitians.get(pos);
-                Toast.makeText(getActivity(), model.getName(), Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("name", model.getName());
+                bundle.putString("imageUrl", model.getImageUrl());
+                bundle.putString("id", model.getId());
+                bundle.putString("contact", model.getContact());
+                bundle.putString("address", model.getAddress());
+                bundle.putString("company", model.getCompany());
+                bundle.putString("website", model.getWebsite());
+                Intent intent = new Intent(getActivity(), DietitianProfileActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
@@ -81,7 +93,7 @@ public class DietitiansFragment extends Fragment {
         dietitians.clear();
         refreshLayout.setRefreshing(true);
         for(int i=0; i<9; i++)
-            dietitians.add(new DietitianModel("","", names[i], "NutriDi", "", "", ""));
+            dietitians.add(new DietitianModel("","", names[i], "NutriDi", "0501592332", "Kumasi", "dietitian.com"));
 
         refreshLayout.setRefreshing(false);
         adapter.notifyDataSetChanged();

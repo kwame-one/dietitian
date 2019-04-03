@@ -94,7 +94,7 @@
                 android:id="@+id/share"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_share"
+                android:src="@drawable/ic_share1"
                 android:layout_weight="1"/>
 
         </LinearLayout>

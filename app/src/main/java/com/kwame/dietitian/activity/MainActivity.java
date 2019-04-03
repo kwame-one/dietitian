@@ -1,5 +1,6 @@
 package com.kwame.dietitian.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.kwame.dietitian.R;
 import com.kwame.dietitian.fragment.CategoryFragment;
 import com.kwame.dietitian.fragment.DietitiansFragment;
@@ -23,15 +25,18 @@ import com.kwame.dietitian.fragment.NewsFeedFragment;
 import com.kwame.dietitian.fragment.SettingsFragment;
 import com.kwame.dietitian.util.UserPref;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private UserPref pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        UserPref pref = new UserPref(this);
+        pref = new UserPref(this);
         if (pref.getToken() == null) {
             startActivity(new Intent(this, AuthActivity.class));
             finish();
@@ -73,6 +78,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -87,7 +97,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            pref.logout();
+            startActivity(new Intent(MainActivity.this, AuthActivity.class));
+            finish();
             return true;
         }
 

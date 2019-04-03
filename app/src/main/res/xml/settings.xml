@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/notification"
+        android:summaryOff="@string/switchOFF"
+        android:summaryOn="@string/switchON"
+        android:title="@string/notification"/>
+
+
+    <Preference
+        android:key="@string/developer"
+        android:summary="@string/anonymous"
+        android:title="@string/developer"/>
+
+    <!--<Preference-->
+        <!--android:key="@string/feedback"-->
+        <!--android:summary="@string/feedback_summary"-->
+        <!--android:title="@string/feedback">-->
+
+        <!--<intent android:action="android.content.Intent.ACTION_SEND"-->
+            <!--android:data="@string/mail"/>-->
+
+    <!--</Preference>-->
+
+    <Preference
+        android:key="@string/version"
+        android:summary="@string/version_number"
+        android:title="@string/version"/>
+
+
+</PreferenceScreen>

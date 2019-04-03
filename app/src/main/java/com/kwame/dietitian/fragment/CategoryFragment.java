@@ -15,6 +15,7 @@ import com.kwame.dietitian.R;
 import com.kwame.dietitian.adapter.CategoryAdapter;
 import com.kwame.dietitian.listener.ItemCheckListener;
 import com.kwame.dietitian.model.CategoryModel;
+import com.kwame.dietitian.util.UserPref;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class CategoryFragment extends Fragment {
     "Renal Disease", "Paediatric Nutrition", "Eating Disorders", "Pulmonary Disease", "Allergies", "Celiac Disease"};
     private int[] icons = {R.drawable.weight, R.drawable.hbp, R.drawable.diabetes, R.drawable.anaemia, R.drawable.renal, R.drawable.pediatric,
     R.drawable.eating, R.drawable.pulmonary, R.drawable.allergy, R.drawable.celiac};
+    private UserPref pref;
 
     @Nullable
     @Override
@@ -42,6 +44,7 @@ public class CategoryFragment extends Fragment {
     }
 
     private void initView(View view) {
+        pref = new UserPref(getActivity());
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_category);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -53,7 +56,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onItemChecked(int pos, boolean isChecked) {
                 CategoryModel model = categories.get(pos);
-                Toast.makeText(getActivity(), model.getText() +" "+ isChecked, Toast.LENGTH_SHORT).show();
+                pref.saveChecked(model.getText(), isChecked);
             }
         });
 
@@ -62,7 +65,7 @@ public class CategoryFragment extends Fragment {
 
     private void getCategories() {
         for(int i=0; i<texts.length; i++)
-            categories.add(new CategoryModel(icons[i], texts[i], false));
+            categories.add(new CategoryModel(icons[i], texts[i], pref.getChecked(texts[i])));
         categoryAdapter.notifyDataSetChanged();
     }
 }
