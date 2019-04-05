@@ -56,7 +56,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.NewsFe
         newsFeedViewHolder.title.setText(model.getTitle());
         newsFeedViewHolder.content.setText(model.getContent());
         newsFeedViewHolder.likeCounter.setText(model.getLikeCounter());
-//        Picasso.get().load(model.getImageUrl()).placeholder(R.drawable.placeholder).into(newsFeedViewHolder.image);
+        Picasso.get().load(model.getImageUrl()).placeholder(R.drawable.placeholder).into(newsFeedViewHolder.image);
     }
 
     @Override

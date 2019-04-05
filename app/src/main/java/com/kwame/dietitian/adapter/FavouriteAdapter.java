@@ -15,6 +15,7 @@ import com.kwame.dietitian.listener.ItemClickListener;
 import com.kwame.dietitian.listener.ItemLikeListener;
 import com.kwame.dietitian.listener.ItemShareListener;
 import com.kwame.dietitian.model.NewsFeedModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         favouriteViewHolder.title.setText(model.getTitle());
         favouriteViewHolder.content.setText(model.getContent());
         favouriteViewHolder.likeCounter.setText(model.getLikeCounter());
-//        Picasso.get().load(model.getImageUrl()).placeholder(R.drawable.placeholder).into(favouriteViewHolder.image);
+        Picasso.get().load(model.getImageUrl()).placeholder(R.drawable.placeholder).into(favouriteViewHolder.image);
     }
 
     @Override
@@ -77,6 +78,9 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
             likeCounter = itemView.findViewById(R.id.likeCounter);
             likeLayout = itemView.findViewById(R.id.like_layout);
             share = itemView.findViewById(R.id.share);
+
+            likeLayout.setVisibility(View.GONE);
+            share.setVisibility(View.GONE);
 
             likeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override

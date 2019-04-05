@@ -12,39 +12,50 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
       <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize"
           android:orientation="horizontal"
-          android:gravity="center">
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize">
 
           <ImageView
               android:background="?android:attr/selectableItemBackground"
               android:id="@+id/back"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:scaleType="centerInside"
+              android:scaleType="centerCrop"
+              android:padding="20dp"
+              android:layout_marginEnd="5dp"
               android:src="@drawable/ic_arrow_back"
-              android:layout_weight="2"/>
+              android:layout_weight="2"
+              />
 
           <TextView
-              android:id="@+id/bar_title"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              tools:text="Hello World"
+              android:gravity="center_vertical"
               android:layout_weight="1"
+              android:id="@+id/bar_title"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              tools:text="Hello World"
               android:maxLines="1"
               android:ellipsize="end"
-              android:textSize="17sp"
+              android:textSize="20sp"
               android:textColor="@color/white"/>
 
-          <ImageView
-              android:background="?android:attr/selectableItemBackground"
+          <ToggleButton
+              android:layout_weight="2.2"
+              android:layout_marginStart="10dp"
               android:id="@+id/favourite"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:scaleType="centerInside"
-              android:src="@drawable/ic_star_border"
-              android:layout_weight="2"/>
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
+              android:layout_marginEnd="5dp"
+              android:textOff=""
+              android:focusable="false"
+              android:focusableInTouchMode="false"
+              android:textOn=""
+              android:checked="false"
+              android:background="@drawable/toggle"
+              />
 
 
       </LinearLayout>

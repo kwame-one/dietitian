@@ -15,6 +15,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kwame.dietitian.R;
 import com.kwame.dietitian.activity.DietitianProfileActivity;
 import com.kwame.dietitian.adapter.DietitianAdapter;
@@ -22,6 +27,7 @@ import com.kwame.dietitian.listener.ItemClickListener;
 import com.kwame.dietitian.model.DietitianModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DietitiansFragment extends Fragment {
@@ -29,8 +35,7 @@ public class DietitiansFragment extends Fragment {
     private DietitianAdapter adapter;
     private List<DietitianModel> dietitians = new ArrayList<>();
     private TextView textView;
-    private String[] names = {"John Doe", "Margette Doe", "Janet Doe", "Alice Freeman", "Alex Freeman"
-    , "Felix Ferguson", "Janice Wick", "Dickson Stark", "Steve Rogers", "Bruce Banner"};
+    private DatabaseReference databaseReference;
 
     @Nullable
     @Override
@@ -47,6 +52,7 @@ public class DietitiansFragment extends Fragment {
     }
 
     private void initView(View view) {
+        databaseReference = FirebaseDatabase.getInstance().getReference("dietitians");
         textView = view.findViewById(R.id.text);
         refreshLayout = view.findViewById(R.id.refresh);
         refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
@@ -90,12 +96,27 @@ public class DietitiansFragment extends Fragment {
     }
 
     private void loadDietitians() {
-        dietitians.clear();
         refreshLayout.setRefreshing(true);
-        for(int i=0; i<9; i++)
-            dietitians.add(new DietitianModel("","", names[i], "NutriDi", "0501592332", "Kumasi", "dietitian.com"));
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dietitians.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    HashMap<String, Object> data = (HashMap<String, Object>) snapshot.getValue();
+//                    System.out.println(data.get("imageUrl"));
+                    dietitians.add(0, new DietitianModel(snapshot.getKey(), String.valueOf(data.get("imageUrl")), String.valueOf(data.get("name")), String.valueOf(data.get("company")), String.valueOf(data.get("contact")), String.valueOf(data.get("address")), String.valueOf(data.get("website"))));
 
-        refreshLayout.setRefreshing(false);
-        adapter.notifyDataSetChanged();
+                }
+
+                refreshLayout.setRefreshing(false);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
     }
 }

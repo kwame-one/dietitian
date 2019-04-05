@@ -1,5 +1,6 @@
 package com.kwame.dietitian.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -13,14 +14,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kwame.dietitian.R;
+import com.kwame.dietitian.activity.NewsDetailsActivity;
 import com.kwame.dietitian.adapter.FavouriteAdapter;
 import com.kwame.dietitian.listener.ItemClickListener;
 import com.kwame.dietitian.listener.ItemLikeListener;
 import com.kwame.dietitian.listener.ItemShareListener;
 import com.kwame.dietitian.model.NewsFeedModel;
+import com.kwame.dietitian.util.UserPref;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FavouriteFragment extends Fragment {
@@ -28,6 +37,8 @@ public class FavouriteFragment extends Fragment {
     private FavouriteAdapter adapter;
     private List<NewsFeedModel> favourites = new ArrayList<>();
     private SwipeRefreshLayout refreshLayout;
+    private UserPref userPref;
+    private DatabaseReference databaseReference;
 
     @Nullable
     @Override
@@ -44,6 +55,8 @@ public class FavouriteFragment extends Fragment {
     }
 
     private void initView(View view) {
+        userPref = new UserPref(getActivity());
+        databaseReference = FirebaseDatabase.getInstance().getReference("favourites/"+userPref.getToken());
         refreshLayout = view.findViewById(R.id.refresh);
         refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_favourites);
@@ -58,7 +71,16 @@ public class FavouriteFragment extends Fragment {
             @Override
             public void onItemClick(View view, int pos) {
                 NewsFeedModel model = favourites.get(pos);
-                Toast.makeText(getActivity(), model.getTitle(), Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("id", model.getId());
+                bundle.putString("imageUrl", model.getImageUrl());
+                bundle.putString("title", model.getTitle());
+                bundle.putString("content", model.getContent());
+                bundle.putString("like", model.getLikeCounter());
+                Intent intent = new Intent(getActivity(), NewsDetailsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
             }
         });
 
@@ -94,15 +116,33 @@ public class FavouriteFragment extends Fragment {
     private void loadFavourites() {
         refreshLayout.setRefreshing(true);
 
-        for(int i=0; i<9; i++)
-            favourites.add(new NewsFeedModel("", "", getString(R.string.test_title), getString(R.string.test_content), "0"));
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                favourites.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    HashMap<String, Object> data = (HashMap<String, Object>) snapshot.getValue();
+                    favourites.add(0, new NewsFeedModel(snapshot.getKey(), String.valueOf(data.get("imageUrl")), String.valueOf(data.get("title")), String.valueOf(data.get("content")), String.valueOf(data.get("likeCount")), ""));
 
-        refreshLayout.setRefreshing(false);
-        adapter.notifyDataSetChanged();
+                }
+
+                refreshLayout.setRefreshing(false);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
     }
 
-    private void likeFavourite(String id) {
-
+    private void likeFavourite(int pos) {
+        NewsFeedModel model = favourites.get(pos);
+        int like = Integer.parseInt(model.getLikeCounter());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("news_feed/"+model.getId());
+        reference.child("likeCount").setValue(++like);
     }
 }
 

@@ -6,13 +6,15 @@ public class NewsFeedModel {
     private String title;
     private String content;
     private String likeCounter;
+    private String cat;
 
-    public NewsFeedModel(String id, String imageUrl, String title, String content, String likeCounter) {
+    public NewsFeedModel(String id, String imageUrl, String title, String content, String likeCounter, String cat) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.title = title;
         this.content = content;
         this.likeCounter = likeCounter;
+        this.cat = cat;
     }
 
     public String getId() {
@@ -53,5 +55,13 @@ public class NewsFeedModel {
 
     public void setLikeCounter(String likeCounter) {
         this.likeCounter = likeCounter;
+    }
+
+    public String getCat() {
+        return cat;
+    }
+
+    public void setCat(String cat) {
+        this.cat = cat;
     }
 }
