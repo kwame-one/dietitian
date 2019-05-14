@@ -45,12 +45,17 @@ public class CategoryFragment extends Fragment {
 
     private void initView(View view) {
         pref = new UserPref(getActivity());
+
+       // int num = pref.getOptionsNumber();
+        pref.setOptionsNumber();
+
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_category);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         categoryAdapter = new CategoryAdapter(getActivity(), categories);
         recyclerView.setAdapter(categoryAdapter);
+
 
         categoryAdapter.setItemCheckListener(new ItemCheckListener() {
             @Override
@@ -61,6 +66,7 @@ public class CategoryFragment extends Fragment {
         });
 
         getCategories();
+
     }
 
     private void getCategories() {

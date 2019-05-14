@@ -6,12 +6,14 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
+        android:name=".util.Init"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -25,6 +27,10 @@
         <activity android:name=".activity.DietitianProfileActivity"/>
         <activity android:name=".activity.NewsDetailsActivity"/>
         <activity android:name=".activity.ConsultDietitianActivity"/>
+        <activity android:name=".activity.UserProfileActivity"/>
+        <activity android:name=".activity.DietPlanActivity"/>
+        <activity android:name=".activity.DietActivity"/>
+        <activity android:name=".activity.DietActivity2"/>
 
     </application>
 

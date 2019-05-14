@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="3dp"
+    android:layout_margin="3dp">
+
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            tools:text="Breakfast"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:id="@+id/time"
+            android:layout_marginBottom="10dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/diet"
+            tools:text="Lorem Ipsum"
+            android:textSize="17sp"
+            android:maxLines="5"
+            android:ellipsize="marquee"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>

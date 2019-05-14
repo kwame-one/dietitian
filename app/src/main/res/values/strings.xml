@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dietitian</string>
+    <string name="app_name">NutriBright</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -34,10 +34,20 @@
     <string name="feedback_summary">Send us your feedback</string>
     <string name="feedback_key">feedback</string>
     <string name="feedback">Feedback</string>
-    <string name="mail">alexfreeman221@gmail.com</string>
+    <string name="mail">mailto:alexfreeman221@gmail.com</string>
     <string name="consult">Consult Dietitian</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="company">Company</string>
     <string name="website">Website</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="plans">Plans</string>
+    <string name="name">Name</string>
+    <string name="weight">Weight (Kg)</string>
+    <string name="height">Height (cm)</string>
+    <string name="save">Save</string>
+    <string name="age">Age</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="unsubscribe">Unsubscribe</string>
 </resources>

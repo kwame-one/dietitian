@@ -156,23 +156,28 @@ public class NewsFeedFragment extends Fragment {
 
     private void getFeedByUserPreferences() {
         newsFeed.clear();
+        int counter = 1;
         for (int i=0; i<texts.length; i++) {
             if(userPref.getChecked(texts[i])) {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(texts[i]);
-                getFeedByName(reference, i);
+                getFeedByName(reference, i, counter);
+                counter++;
             }
         }
-        refreshLayout.setRefreshing(false);
       //  adapter.notifyDataSetChanged();
     }
 
-    private void getFeedByName(DatabaseReference reference, final int index) {
+    private void getFeedByName(DatabaseReference reference, final int index, final int counter) {
         refreshLayout.setRefreshing(true);
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
                 newsFeed.add(0, new NewsFeedModel(dataSnapshot.getKey(), String.valueOf(data.get("imageUrl")), String.valueOf(data.get("title")), String.valueOf(data.get("content")), String.valueOf(data.get("likeCount")), texts[index]));
+                System.out.println("counter "+userPref.getOptionsNumber());
+                if (counter == userPref.getOptionsNumber()) {
+                    refreshLayout.setRefreshing(false);
+                }
                 adapter.notifyDataSetChanged();
             }
 
@@ -201,6 +206,7 @@ public class NewsFeedFragment extends Fragment {
 
             }
         });
+
 
     }
 

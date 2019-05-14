@@ -76,7 +76,7 @@ public class RegisterFragment extends Fragment {
                         getActivity().finish();
                     }else{
                         dialog.hide();
-                        Toast.makeText(getActivity(), "Error creating account, please retry", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Email already exists, please try again", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
