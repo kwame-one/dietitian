@@ -51,15 +51,16 @@ public class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlansViewHol
 
     class PlansViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageView;
+        private ImageView imageView, more;
         private TextView plan;
 
         public PlansViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
             plan = itemView.findViewById(R.id.plan);
+            more = itemView.findViewById(R.id.more);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            more.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onItemClick(v, getAdapterPosition());

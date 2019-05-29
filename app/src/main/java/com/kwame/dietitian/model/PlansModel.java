@@ -2,12 +2,23 @@ package com.kwame.dietitian.model;
 
 public class PlansModel {
 
+    private String nodeId;
     private String id;
     private int image;
     private String plan;
     private int numberOfDays;
+    private String imageUrl;
+
 
     public PlansModel(String id, int image, String plan, int numberOfDays) {
+        this.id = id;
+        this.image = image;
+        this.plan = plan;
+        this.numberOfDays = numberOfDays;
+    }
+
+    public PlansModel(String nodeId, String id, int image, String plan, int numberOfDays) {
+        this.nodeId = nodeId;
         this.id = id;
         this.image = image;
         this.plan = plan;
@@ -44,5 +55,21 @@ public class PlansModel {
 
     public void setNumberOfDays(int numberOfDays) {
         this.numberOfDays = numberOfDays;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getNodeId() {
+        return nodeId;
+    }
+
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
     }
 }

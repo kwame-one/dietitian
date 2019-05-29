@@ -84,35 +84,35 @@ public class DietPlanActivity extends AppCompatActivity {
         setDays();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.diet_plan, menu);
-        if (pref.isSubscribed(bundle.getString("plan"))) {
-            menu.findItem(R.id.subscribe).setVisible(false);
-            menu.findItem(R.id.unsubscribe).setVisible(true);
-        }else{
-            menu.findItem(R.id.subscribe).setVisible(true);
-            menu.findItem(R.id.unsubscribe).setVisible(false);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.subscribe) {
-          //  Toast.makeText(DietPlanActivity.this, "sub", Toast.LENGTH_SHORT).show();
-            pref.subscribe(bundle.getString("plan"));
-            notifyApp(bundle.getString("plan"), "subscribed");
-
-            return true;
-        }else if (item.getItemId() == R.id.unsubscribe) {
-           // Toast.makeText(DietPlanActivity.this, "unsub", Toast.LENGTH_SHORT).show();
-            pref.unSubscribe(bundle.getString("plan"));
-            notifyApp(bundle.getString("plan"), "unsubscribed");
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.diet_plan, menu);
+//        if (pref.isSubscribed(bundle.getString("plan"))) {
+//            menu.findItem(R.id.subscribe).setVisible(false);
+//            menu.findItem(R.id.unsubscribe).setVisible(true);
+//        }else{
+//            menu.findItem(R.id.subscribe).setVisible(true);
+//            menu.findItem(R.id.unsubscribe).setVisible(false);
+//        }
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.subscribe) {
+//          //  Toast.makeText(DietPlanActivity.this, "sub", Toast.LENGTH_SHORT).show();
+//            pref.subscribe(bundle.getString("plan"));
+//            notifyApp(bundle.getString("plan"), "subscribed");
+//
+//            return true;
+//        }else if (item.getItemId() == R.id.unsubscribe) {
+//           // Toast.makeText(DietPlanActivity.this, "unsub", Toast.LENGTH_SHORT).show();
+//            pref.unSubscribe(bundle.getString("plan"));
+//            notifyApp(bundle.getString("plan"), "unsubscribed");
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void setDays() {
         int number = bundle.getInt("days");

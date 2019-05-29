@@ -1,12 +1,14 @@
 package com.kwame.dietitian.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,11 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kwame.dietitian.R;
 import com.kwame.dietitian.fragment.CategoryFragment;
+import com.kwame.dietitian.fragment.DietToolsFragment;
 import com.kwame.dietitian.fragment.DietitiansFragment;
 import com.kwame.dietitian.fragment.FavouriteFragment;
 import com.kwame.dietitian.fragment.NewsFeedFragment;
 import com.kwame.dietitian.fragment.PlansFragment;
 import com.kwame.dietitian.fragment.SettingsFragment;
+import com.kwame.dietitian.fragment.SubscribedPlansFragment;
 import com.kwame.dietitian.util.UserPref;
 
 import java.util.HashMap;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this, AuthActivity.class));
             finish();
         }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,6 +82,13 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new NewsFeedFragment()).commit();
         navigationView.setCheckedItem(R.id.nav_feed);
 
+
+        if (!pref.isFirstLaunch()) {
+            displayAlert();
+            pref.saveFirstLaunch();
+        }
+
+
         getUserDetails();
     }
 
@@ -86,9 +98,10 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if (status)
+            if (status) {
+                pref.updateFirstLaunch();
                 super.onBackPressed();
-            else {
+            }else {
                 Toast.makeText(MainActivity.this, "Please press back again to exit", Toast.LENGTH_SHORT).show();
                 status = true;
             }
@@ -144,6 +157,10 @@ public class MainActivity extends AppCompatActivity
             fragment = new DietitiansFragment();
         else if (id == R.id.nav_plans)
             fragment = new PlansFragment();
+        else if (id == R.id.nav_diet_tools)
+            fragment = new DietToolsFragment();
+        else if (id == R.id.nav_subscribed_plans)
+            fragment = new SubscribedPlansFragment();
         if (fragment != null)
             getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
@@ -177,5 +194,27 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
+    }
+
+    private void displayAlert() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Daily Tips");
+        builder.setMessage(pref.getTip());
+        builder.setCancelable(false);
+//        builder.setCanceledOnTouchOutside
+        builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+//        builder.setNegativeButton("Next", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                builder.setMessage(pref.getTip());
+//            }
+//        });
+
+        builder.create().show();
     }
 }

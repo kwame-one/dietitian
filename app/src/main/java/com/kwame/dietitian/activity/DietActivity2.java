@@ -91,35 +91,35 @@ public class DietActivity2 extends AppCompatActivity {
         getDiet();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.diet_plan, menu);
-        if (pref.isSubscribed(getIntent().getStringExtra("plan"))) {
-            menu.findItem(R.id.subscribe).setVisible(false);
-            menu.findItem(R.id.unsubscribe).setVisible(true);
-        }else{
-            menu.findItem(R.id.subscribe).setVisible(true);
-            menu.findItem(R.id.unsubscribe).setVisible(false);
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.subscribe) {
-          //  Toast.makeText(DietActivity2.this, "sub", Toast.LENGTH_SHORT).show();
-            pref.subscribe(getIntent().getStringExtra("plan"));
-            notifyApp(getIntent().getStringExtra("plan"), "subscribed");
-            return true;
-        }else if (item.getItemId() == R.id.unsubscribe) {
-            //Toast.makeText(DietActivity2.this, "unsub", Toast.LENGTH_SHORT).show();
-            pref.unSubscribe(getIntent().getStringExtra("plan"));
-            notifyApp(getIntent().getStringExtra("plan"), "unsubscribed");
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.diet_plan, menu);
+//        if (pref.isSubscribed(getIntent().getStringExtra("plan"))) {
+//            menu.findItem(R.id.subscribe).setVisible(false);
+//            menu.findItem(R.id.unsubscribe).setVisible(true);
+//        }else{
+//            menu.findItem(R.id.subscribe).setVisible(true);
+//            menu.findItem(R.id.unsubscribe).setVisible(false);
+//        }
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.subscribe) {
+//          //  Toast.makeText(DietActivity2.this, "sub", Toast.LENGTH_SHORT).show();
+//            pref.subscribe(getIntent().getStringExtra("plan"));
+//            notifyApp(getIntent().getStringExtra("plan"), "subscribed");
+//            return true;
+//        }else if (item.getItemId() == R.id.unsubscribe) {
+//            //Toast.makeText(DietActivity2.this, "unsub", Toast.LENGTH_SHORT).show();
+//            pref.unSubscribe(getIntent().getStringExtra("plan"));
+//            notifyApp(getIntent().getStringExtra("plan"), "unsubscribed");
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void notifyApp(String plan, String sub) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)

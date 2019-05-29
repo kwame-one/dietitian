@@ -11,5 +11,5 @@ public class Constants {
     static final String WEIGHT = "weight";
     static final String AGE = "age";
     static final String UPDATED = "updated";
-    //static final String
+    static final String LAUNCH = "first launch";
 }

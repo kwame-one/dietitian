@@ -19,6 +19,37 @@ public class UserPref {
     private Context context;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+    private String[] tips = {"Drinking hot lemon water can prevent cancer. Don&#39;t add sugar. Hot lemon water is more\n" +
+            "beneficial than cold lemon water.",
+    "Both yellow n purple sweet potato have good cancer prevention properties.",
+            "Often taking late night dinner can increase the chance of stomach cancer",
+            "Never take more than 4 eggs per week",
+            "Eating chicken backside can cause stomach cancer",
+            "Never eat fruits after meal. Fruits should be eaten before meals",
+            "Don't take tea during menstruation period.",
+            "Take less soy milk, no adding sugar or egg to soy milk",
+            "Don't eat tomato with empty stomach",
+            "Drink a glass of plain water every morning before food to prevent gall bladder stones",
+            "No food 3 hrs before bed time",
+            "Drink less liquor or avoid, no nutritional properties but can cause diabetes and hypertension",
+            "Do not eat toast bread when it is hot from oven or toaster",
+            "Do not charge your handphone or any device next to you when you are sleeping",
+            "Drink 10 glasses of water a day to prevent bladder cancer",
+            "Drink more water in the day time, less at night",
+            "Don't drink more than 2 cups of coffee a day, may cause insomnia and gastric",
+            "Eat less oily food. It takes 5-7 hrs to digest them, makes you feel tired",
+            "After 5pm, eat less",
+            "Six types of food that makes you happy: banana, grapefruit,  spinach, pumpkin, peach.",
+            "Sleeping less than 8 hrs a day may deteriorate our brain function. Taking Afternoon rest for half an hour may keep our youthful look.",
+            "Cooked tomato has better healing properties than the raw tomato.",
+            "Hot lemon water can sustain your health and make you live longer!",
+            "Hot lemon water kills cancer cells",
+            "Add hot water to 2-3 slices of lemon. Make it a daily drink",
+            "The bitterness in hot lemon water is the best substance to kill cancer cells",
+            "Cold lemon water only has vitamin C, no cancer prevention",
+            "Hot lemon water can control cancer tumor growth.",
+            "Clinical tests have proven hot lemon water works",
+    };
 
     public UserPref(Context context) {
         this.context = context;
@@ -110,6 +141,7 @@ public class UserPref {
 
    }
 
+
    public boolean isSubscribed(String plan) {
         return preferences.getBoolean(plan, false);
    }
@@ -130,6 +162,33 @@ public class UserPref {
 
        NotificationManager mNotificationManager = (NotificationManager)context. getSystemService(Context.NOTIFICATION_SERVICE);
        mNotificationManager.notify(0, builder.build());
+   }
+
+   public void saveFirstLaunch() {
+        editor = preferences.edit();
+        editor.putBoolean(Constants.LAUNCH, true);
+        editor.apply();
+   }
+
+   public void updateFirstLaunch() {
+        editor = preferences.edit();
+        editor.putBoolean(Constants.LAUNCH, false);
+        editor.apply();
+   }
+
+   public boolean isFirstLaunch() {
+        return preferences.getBoolean(Constants.LAUNCH, false);
+   }
+
+
+    private int getRandomIntegerBetweenRange(int min, int max){
+        return (int)(Math.random()*((max-min)+1))+min;
+
+    }
+
+   public String getTip() {
+        int index = getRandomIntegerBetweenRange(-1, tips.length);
+        return tips[index];
    }
 
 

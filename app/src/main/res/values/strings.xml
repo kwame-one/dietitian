@@ -50,4 +50,14 @@
     <string name="age">Age</string>
     <string name="subscribe">Subscribe</string>
     <string name="unsubscribe">Unsubscribe</string>
+    <string name="diet_tools">Diet Tools</string>
+    <string name="bmi">Body Mass Index (BMI)</string>
+    <string name="bmr">Basal Metabolic Rate (BMR)</string>
+    <string name="calc_bmi">Calculate BMI</string>
+    <string name="calc_bmr">Calculate BMR</string>
+    <string name="male">Male</string>
+    <string name="gender">Gender</string>
+    <string name="female">Female</string>
+    <string name="subscribed_plans">Subscribed Plans</string>
+    <string name="no_plan">You have not subscribed to any plans yet</string>
 </resources>
